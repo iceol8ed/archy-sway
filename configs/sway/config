@@ -1,0 +1,155 @@
+# --- Variables ---
+set $mod Mod4
+set $term foot
+set $menu fuzzel -I
+
+# --- Input ---
+# Replaces: input { natural_scroll = yes ... }
+# Enable natural scrolling for all input devices
+input * {
+    natural_scroll enabled
+}
+
+input type:keyboard {
+    xkb_layout "us,gr"
+    xkb_options "grp:toggle"
+}
+
+# --- Cursor ---
+seat seat0 xcursor_theme Bibata-Modern-Classic 20
+exec_always autotiling-rs
+# --- Monitors (CORRECTED) ---
+# DP-1: 2560x1440@165, pos 1080x0 (as it was)
+output DP-1 pos 1080 0 res 2560x1440@165Hz
+# HDMI-A-1: Rotated 90 degrees (transform 1 in Hyprland = 90 in Sway)
+output HDMI-A-1 pos 0 0 transform 270
+# --- Wallpaper ---
+
+output * bg ~/.config/bg.jpg fill
+
+# --- Visuals & Decoration ---
+# Replaces: general { gaps_in/out=0, border_size=0 }
+default_border none
+default_floating_border none
+gaps inner 0
+gaps outer 0
+
+# Note: "blur" is not supported in standard Sway (requires SwayFX)
+# Opacity Rules
+for_window [class="^.*"] opacity 1.0
+# Sway doesn't have a global "inactive_opacity" setting exactly like Hyprland's
+# but this is the closest approximation via command if using SwayFX, 
+# or standard sway doesn't do inactive opacity nicely without scripts.
+# However, we can set specific rules below.
+
+# --- Startup ---
+exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK
+exec hash dbus-update-activation-environment 2>/dev/null && \
+     dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
+
+# Polkit: hyprpolkitagent might not work well outside Hyprland. 
+# Recommended: /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+
+exec_always gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
+exec wl-clip-persist --clipboard regular
+exec wl-paste --watch cliphist store
+# Sway handles idle/suspend via swayidle usually, but we'll map your keys manually below.
+
+# --- Navigation & Movement ---
+# Move focus
+bindsym $mod+h focus left
+bindsym $mod+l focus right
+bindsym $mod+k focus up
+bindsym $mod+j focus down
+
+# Move window
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+l move right
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+j move down
+
+# --- Workspaces ---
+bindsym $mod+1 workspace number 1
+bindsym $mod+2 workspace number 2
+bindsym $mod+3 workspace number 3
+bindsym $mod+4 workspace number 4
+bindsym $mod+5 workspace number 5
+
+# Move container to workspace
+bindsym $mod+Shift+1 move container to workspace number 1
+bindsym $mod+Shift+2 move container to workspace number 2
+bindsym $mod+Shift+3 move container to workspace number 3
+bindsym $mod+Shift+4 move container to workspace number 4
+bindsym $mod+Shift+5 move container to workspace number 5
+
+# Mouse workspace switching (Standard Sway doesn't bind scroll wheel to workspace easily without a script)
+# However, you can use mouse buttons:
+# bindcode 276 (Mouse Side Button Forward)
+bindsym --whole-window button9 workspace next
+# bindcode 275 (Mouse Side Button Back)
+bindsym --whole-window button8 workspace prev
+
+# --- Apps & Utils ---
+bindsym $mod+q kill
+bindsym $mod+b exec helium-browser
+bindsym $mod+Return exec $term
+bindsym $mod+f exec $term yazi
+bindsym $mod+n exec $term bluetui
+bindsym $mod+Shift+n exec $term wiremix
+bindsym $mod+space exec $menu
+bindsym $mod+m exec localsend
+bindsym $mod+s exec spotify
+bindsym $mod+Shift+f fullscreen
+bindsym $mod+Shift+t floating toggle
+
+# System Power
+bindsym $mod+Escape exec systemctl suspend
+bindsym $mod+Shift+Escape exec shutdown now
+
+# Monitor Power (DPMS)
+bindsym $mod+o output * dpms off
+bindsym $mod+Shift+o output * dpms on
+
+# --- Mouse ---
+# Sway handles dragging floating windows with Mod+MouseLeft (move) and Mod+MouseRight (resize) by default.
+floating_modifier $mod normal
+
+# --- Volume ---
+bindsym XF86AudioRaiseVolume exec wpctl set-volume -l 1.4 @DEFAULT_AUDIO_SINK@ 3%+
+bindsym XF86AudioLowerVolume exec wpctl set-volume -l 1.4 @DEFAULT_AUDIO_SINK@ 3%-
+bindsym XF86AudioMute exec wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
+
+# --- Window Rules ---
+# Opacity 1.0 when fullscreen
+# Force active window to be opaque
+# (Sway requires a script for dynamic active/inactive opacity or SwayFX)
+
+# Spotify Rules
+assign [class="(?i)spotify"] output HDMI-A-1
+for_window [class="(?i)spotify"] fullscreen enable
+
+# --- Clipboard / Screenshots ---
+# Replaced hyprshot with grim+slurp
+# Copy Region
+bindsym $mod+p exec grim -g "$(slurp)" - | wl-copy
+# Screenshot Window/Screen (saved to Desktop)
+bindsym $mod+Shift+p exec grim ~/Desktop/$(date +'%Y-%m-%d-%H%M%S_grim.png')
+
+# Cliphist
+bindsym $mod+Shift+v exec cliphist list | fuzzel --dmenu | cliphist decode | wl-copy
+
+# --- Clipboard / Screenshots (Restored Universal Binds using ydotool) ---
+# Note: Requires ydotool and the helper script above.
+# Universal copy (SUPER+C -> CTRL+Insert)
+bindsym $mod+c exec ~/.local/bin/sendkeys.sh "ctrl" "110" 
+# Universal paste (SUPER+V -> SHIFT+Insert)
+bindsym $mod+v exec ~/.local/bin/sendkeys.sh "shift" "110" 
+# Select all (SUPER+A -> CTRL+A)
+bindsym $mod+a exec ~/.local/bin/sendkeys.sh "ctrl" "30" 
+# Universal cut (SUPER+X -> CTRL+X)
+bindsym $mod+x exec ~/.local/bin/sendkeys.sh "ctrl" "45"
+# Delete line (SUPER+BACKSPACE -> CTRL+U)
+bindsym $mod+BackSpace exec ~/.local/bin/sendkeys.sh "ctrl" "22"
+# Delete word / Close tab (SUPER+W -> CTRL+W)
+bindsym --inhibited $mod+w exec ~/.local/bin/sendkeys.sh "ctrl" "17"

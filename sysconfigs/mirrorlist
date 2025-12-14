@@ -1,0 +1,41 @@
+## Greece
+Server = https://repo.greeklug.gr/data/pub/linux/archlinux/$repo/os/$arch
+Server = http://ftp.otenet.gr/linux/archlinux/$repo/os/$arch
+Server = http://ftp.cc.uoc.gr/mirrors/linux/archlinux/$repo/os/$arch
+
+## Bulgaria
+Server = http://mirrors.uni-plovdiv.net/archlinux/$repo/os/$arch
+Server = https://mirrors.uni-plovdiv.net/archlinux/$repo/os/$arch
+Server = http://mirror.telepoint.bg/archlinux/$repo/os/$arch
+Server = https://mirror.telepoint.bg/archlinux/$repo/os/$arch
+
+## Albania
+Server = https://al.arch.niranjan.co/$repo/os/$arch
+
+## North Macedonia
+Server = http://arch.softver.org.mk/archlinux/$repo/os/$arch
+Server = http://mirror.onevip.mk/archlinux/$repo/os/$arch
+Server = http://mirror.t-home.mk/archlinux/$repo/os/$arch
+Server = https://mirror.t-home.mk/archlinux/$repo/os/$arch
+
+## Romania
+Server = http://mirror.ro.cdn-perfprod.com/archlinux/$repo/os/$arch
+Server = https://mirror.ro.cdn-perfprod.com/archlinux/$repo/os/$arch
+Server = http://mirrors.chroot.ro/archlinux/$repo/os/$arch
+Server = https://mirrors.chroot.ro/archlinux/$repo/os/$arch
+Server = http://mirror.efect.ro/archlinux/$repo/os/$arch
+Server = https://mirror.efect.ro/archlinux/$repo/os/$arch
+Server = http://ro.mirror.flokinet.net/archlinux/$repo/os/$arch
+Server = https://ro.mirror.flokinet.net/archlinux/$repo/os/$arch
+Server = http://mirrors.hosterion.ro/archlinux/$repo/os/$arch
+Server = https://mirrors.hosterion.ro/archlinux/$repo/os/$arch
+Server = http://mirrors.hostico.ro/archlinux/$repo/os/$arch
+Server = https://mirrors.hostico.ro/archlinux/$repo/os/$arch
+Server = http://archlinux.mirrors.linux.ro/$repo/os/$arch
+Server = http://mirrors.nav.ro/archlinux/$repo/os/$arch
+Server = https://ro.arch.niranjan.co/$repo/os/$arch
+Server = http://mirrors.nxthost.com/archlinux/$repo/os/$arch
+Server = https://mirrors.nxthost.com/archlinux/$repo/os/$arch
+Server = http://mirrors.pidginhost.com/arch/$repo/os/$arch
+Server = https://mirrors.pidginhost.com/arch/$repo/os/$arch
+

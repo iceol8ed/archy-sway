@@ -1,0 +1,31 @@
+if [[ -z "$BROWSER" && "$OSTYPE" == darwin* ]]; then
+  export BROWSER='open'
+fi
+if [[ -z "$EDITOR" ]]; then
+  export EDITOR='nvim'
+fi
+if [[ -z "$VISUAL" ]]; then
+  export VISUAL='nvim'
+fi
+if [[ -z "$PAGER" ]]; then
+  export PAGER='less'
+fi
+if [[ -z "$LANG" ]]; then
+  export LANG='en_US.UTF-8'
+fi
+typeset -gU cdpath fpath mailpath path
+path=(
+  $HOME/{,s}bin(N)
+  /opt/{homebrew,local}/{,s}bin(N)
+  /usr/local/{,s}bin(N)
+  $path
+)
+if [[ -z "$LESS" ]]; then
+  export LESS='-g -i -M -R -S -w -X -z-4'
+fi
+if [[ -z "$LESSOPEN" ]] && (( $#commands[(i)lesspipe(|.sh)] )); then
+  export LESSOPEN="| /usr/bin/env $commands[(i)lesspipe(|.sh)] %s 2>&-"
+fi
+if [[ -z $DISPLAY ]] && [[ $(tty) == /dev/tty1 ]]; then
+    exec Hyprland
+fi
