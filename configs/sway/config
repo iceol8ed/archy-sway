@@ -18,13 +18,8 @@ input type:keyboard {
 # --- Cursor ---
 seat seat0 xcursor_theme Bibata-Modern-Classic 20
 exec_always autotiling-rs
-# --- Monitors (CORRECTED) ---
-# DP-1: 2560x1440@165, pos 1080x0 (as it was)
-output DP-1 pos 1080 0 res 2560x1440@165Hz
-# HDMI-A-1: Rotated 90 degrees (transform 1 in Hyprland = 90 in Sway)
-output HDMI-A-1 pos 0 0 transform 270
-# --- Wallpaper ---
 
+# --- Wallpaper ---
 output * bg ~/.config/bg.jpg fill
 
 # --- Visuals & Decoration ---
@@ -35,12 +30,7 @@ gaps inner 0
 gaps outer 0
 
 # Note: "blur" is not supported in standard Sway (requires SwayFX)
-# Opacity Rules
 for_window [class="^.*"] opacity 1.0
-# Sway doesn't have a global "inactive_opacity" setting exactly like Hyprland's
-# but this is the closest approximation via command if using SwayFX, 
-# or standard sway doesn't do inactive opacity nicely without scripts.
-# However, we can set specific rules below.
 
 # --- Startup ---
 exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK
@@ -83,13 +73,6 @@ bindsym $mod+Shift+3 move container to workspace number 3
 bindsym $mod+Shift+4 move container to workspace number 4
 bindsym $mod+Shift+5 move container to workspace number 5
 
-# Mouse workspace switching (Standard Sway doesn't bind scroll wheel to workspace easily without a script)
-# However, you can use mouse buttons:
-# bindcode 276 (Mouse Side Button Forward)
-bindsym --whole-window button9 workspace next
-# bindcode 275 (Mouse Side Button Back)
-bindsym --whole-window button8 workspace prev
-
 # --- Apps & Utils ---
 bindsym $mod+q kill
 bindsym $mod+b exec helium-browser
@@ -119,15 +102,6 @@ floating_modifier $mod normal
 bindsym XF86AudioRaiseVolume exec wpctl set-volume -l 1.4 @DEFAULT_AUDIO_SINK@ 3%+
 bindsym XF86AudioLowerVolume exec wpctl set-volume -l 1.4 @DEFAULT_AUDIO_SINK@ 3%-
 bindsym XF86AudioMute exec wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
-
-# --- Window Rules ---
-# Opacity 1.0 when fullscreen
-# Force active window to be opaque
-# (Sway requires a script for dynamic active/inactive opacity or SwayFX)
-
-# Spotify Rules
-assign [class="(?i)spotify"] output HDMI-A-1
-for_window [class="(?i)spotify"] fullscreen enable
 
 # --- Clipboard / Screenshots ---
 # Replaced hyprshot with grim+slurp
