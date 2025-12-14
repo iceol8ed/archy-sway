@@ -112,18 +112,3 @@ bindsym $mod+Shift+p exec grim ~/Desktop/$(date +'%Y-%m-%d-%H%M%S_grim.png')
 
 # Cliphist
 bindsym $mod+Shift+v exec cliphist list | fuzzel --dmenu | cliphist decode | wl-copy
-
-# --- Clipboard / Screenshots (Restored Universal Binds using ydotool) ---
-# Note: Requires ydotool and the helper script above.
-# Universal copy (SUPER+C -> CTRL+Insert)
-bindsym $mod+c exec ~/.local/bin/sendkeys.sh "ctrl" "110" 
-# Universal paste (SUPER+V -> SHIFT+Insert)
-bindsym $mod+v exec ~/.local/bin/sendkeys.sh "shift" "110" 
-# Select all (SUPER+A -> CTRL+A)
-bindsym $mod+a exec ~/.local/bin/sendkeys.sh "ctrl" "30" 
-# Universal cut (SUPER+X -> CTRL+X)
-bindsym $mod+x exec ~/.local/bin/sendkeys.sh "ctrl" "45"
-# Delete line (SUPER+BACKSPACE -> CTRL+U)
-bindsym $mod+BackSpace exec ~/.local/bin/sendkeys.sh "ctrl" "22"
-# Delete word / Close tab (SUPER+W -> CTRL+W)
-bindsym --inhibited $mod+w exec ~/.local/bin/sendkeys.sh "ctrl" "17"
