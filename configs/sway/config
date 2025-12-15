@@ -26,6 +26,9 @@ exec_always --no-startup-id ydotoold
 # --- Wallpaper ---
 output * bg ~/.config/bg.jpg fill
 
+#workspace 5 output HDMI-A-1
+#assign [app_id="spotify"] 5
+
 # --- Visuals & Decoration ---
 # Replaces: general { gaps_in/out=0, border_size=0 }
 default_border none
