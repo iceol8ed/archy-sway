@@ -17,6 +17,9 @@ input type:keyboard {
 
 # --- Cursor ---
 seat seat0 xcursor_theme Bibata-Modern-Classic 20
+# Hide mouse cursor after 3 seconds of inactivity
+seat * hide_cursor 3000
+
 exec_always autotiling-rs
 exec_always --no-startup-id ydotoold
 
