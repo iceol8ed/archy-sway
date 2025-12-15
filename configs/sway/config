@@ -18,7 +18,8 @@ input type:keyboard {
 # --- Cursor ---
 seat seat0 xcursor_theme Bibata-Modern-Classic 20
 exec_always autotiling-rs
-exec_always ydotoold
+exec_always --no-startup-id ydotoold
+
 # --- Wallpaper ---
 output * bg ~/.config/bg.jpg fill
 
@@ -39,7 +40,7 @@ exec hash dbus-update-activation-environment 2>/dev/null && \
 
 # Polkit: hyprpolkitagent might not work well outside Hyprland. 
 # Recommended: /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
-exec /usr/lib/polkit-kde-authentication-agent-1 
+exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 
 exec_always gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
 exec wl-clip-persist --clipboard regular
@@ -48,17 +49,18 @@ exec wl-paste --watch cliphist store
 
 # --- Navigation & Movement ---
 # Move focus
-bindsym $mod+h focus left
-bindsym $mod+l focus right
-bindsym $mod+k focus up
-bindsym $mod+j focus down
+bindsym --to-code {
+  $mod+h focus left
+  $mod+l focus right
+  $mod+k focus up
+  $mod+j focus down
 
 # Move window
-bindsym $mod+Shift+h move left
-bindsym $mod+Shift+l move right
-bindsym $mod+Shift+k move up
-bindsym $mod+Shift+j move down
-
+  $mod+Shift+h move left
+  $mod+Shift+l move right
+  $mod+Shift+k move up
+  $mod+Shift+j move down
+}
 # --- Workspaces ---
 bindsym $mod+1 workspace number 1
 bindsym $mod+2 workspace number 2
@@ -74,25 +76,27 @@ bindsym $mod+Shift+4 move container to workspace number 4, workspace 4
 bindsym $mod+Shift+5 move container to workspace number 5, workspace 5
 
 # --- Apps & Utils ---
-bindsym $mod+q kill
-bindsym $mod+b exec helium-browser
-bindsym $mod+Return exec $term
-bindsym $mod+f exec $term yazi
-bindsym $mod+n exec $term bluetui
-bindsym $mod+Shift+n exec $term wiremix
-bindsym $mod+space exec $menu
-bindsym $mod+m exec localsend
-bindsym $mod+s exec spotify
-bindsym $mod+Shift+f fullscreen
-bindsym $mod+Shift+t floating toggle
+bindsym --to-code {
+  $mod+q kill
+  $mod+b exec helium-browser
+  $mod+Return exec $term
+  $mod+f exec $term yazi
+  $mod+n exec $term bluetui
+  $mod+Shift+n exec $term wiremix
+  $mod+space exec $menu
+  $mod+m exec localsend
+  $mod+s exec spotify
+  $mod+Shift+f fullscreen
+  $mod+Shift+t floating toggle
+
+# Monitor Power (DPMS)
+  $mod+o output * dpms off
+  $mod+Shift+o output * dpms on
+}
 
 # System Power
 bindsym $mod+Escape exec systemctl suspend
 bindsym $mod+Shift+Escape exec shutdown now
-
-# Monitor Power (DPMS)
-bindsym $mod+o output * dpms off
-bindsym $mod+Shift+o output * dpms on
 
 # --- Mouse ---
 # Sway handles dragging floating windows with Mod+MouseLeft (move) and Mod+MouseRight (resize) by default.
@@ -118,3 +122,4 @@ bindsym $mod+v exec wtype -M shift -k Insert -m shift
 bindsym $mod+a exec wtype -M ctrl -k a -m ctrl
 bindsym $mod+w exec wtype -M ctrl -k w -m ctrl
 bindsym $mod+backspace exec wtype -M ctrl -k u -m ctrl
+
