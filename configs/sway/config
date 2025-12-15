@@ -18,7 +18,7 @@ input type:keyboard {
 # --- Cursor ---
 seat seat0 xcursor_theme Bibata-Modern-Classic 20
 exec_always autotiling-rs
-
+exec_always ydotoold
 # --- Wallpaper ---
 output * bg ~/.config/bg.jpg fill
 
@@ -112,3 +112,9 @@ bindsym $mod+Shift+p exec grim ~/Desktop/$(date +'%Y-%m-%d-%H%M%S_grim.png')
 
 # Cliphist
 bindsym $mod+Shift+v exec cliphist list | fuzzel --dmenu | cliphist decode | wl-copy
+
+bindsym $mod+c exec wtype -M ctrl -k Insert -m ctrl
+bindsym $mod+v exec wtype -M shift -k Insert -m shift 
+bindsym $mod+a exec wtype -M ctrl -k a -m ctrl
+bindsym $mod+w exec wtype -M ctrl -k w -m ctrl
+bindsym $mod+backspace exec wtype -M ctrl -k u -m ctrl
