@@ -119,7 +119,7 @@ retry_cmd sudo -u "$TARGET_USER" paru --mflags --skippgpcheck -S --noconfirm \
   helium-browser-bin localsend-bin bibata-cursor-theme-bin curd lobster-git spotify
 
 echo "[*] Setting up Spotify ..."
-retry_cmd sudo -u "$TARGET_USER" bash <(curl -sSL https://raw.githubusercontent.com/SpotX-Official/SpotX-Bash/main/spotx.sh)
+retry_cmd curl -sSL https://spotx-official.github.io/run.sh | sudo -u user bash
 
 echo "[*] Changing default shell to zsh ..."
 chsh -s /bin/zsh "$TARGET_USER"
