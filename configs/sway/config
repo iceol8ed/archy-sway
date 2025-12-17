@@ -46,7 +46,7 @@ exec hash dbus-update-activation-environment 2>/dev/null && \
 
 # Polkit: hyprpolkitagent might not work well outside Hyprland. 
 # Recommended: /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
-exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+exec /usr/lib/polkit-kde-authentication-agent-1
 
 exec_always gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
 exec wl-clip-persist --clipboard regular
