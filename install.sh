@@ -151,7 +151,7 @@ pacman -Scc --noconfirm --ask 4
 # 2. Clear Paru cache
 # We use 'paru --noconfirm' which passes the flag down to pacman
 echo "[*] Clearing Paru cache..."
-sudo -u "$TARGET_USER" paru -Scc --noconfirm
+sudo -u "$TARGET_USER" paru -Scc --noconfirm --ask 4
 
 # --- END: CORRECTED CACHE CLEANING BLOCK ---
 
