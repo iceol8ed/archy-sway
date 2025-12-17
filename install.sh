@@ -141,19 +141,21 @@ chown -R "$TARGET_USER:$TARGET_USER" "$HOME_DIR/.zprezto/runcoms/"
 # --- END: NEW/MODIFIED BLOCK FOR PREZTO CONFIG ---
 
 # --- START: CORRECTED CACHE CLEANING BLOCK ---
-echo "[*] Clearing Pacman and Paru package caches (will answer 'Yes' to all prompts) ..."
+echo "[*] Clearing Pacman and Paru package caches..."
 
-# 1. Clear Pacman cache: 'yes | pacman -Scc' pipes 'y' to both prompts,
-# ensuring the second, space-clearing prompt is answered 'Yes'.
+# 1. Clear Pacman cache
+# --noconfirm handles basic prompts, --ask 4 handles the 'Delete all?' prompt
 echo "[*] Clearing Pacman cache..."
-yes | pacman -Scc
+pacman -Scc --noconfirm --ask 4
 
-# 2. Clear Paru cache (must be run as the target user):
-# 'yes | paru -Scc' ensures 'Yes' is provided to both prompts.
+# 2. Clear Paru cache
+# We use 'paru --noconfirm' which passes the flag down to pacman
 echo "[*] Clearing Paru cache..."
-sudo -u "$TARGET_USER" bash -c 'yes | paru -Scc'
+sudo -u "$TARGET_USER" paru -Scc --noconfirm
+
 # --- END: CORRECTED CACHE CLEANING BLOCK ---
 
+# --- END: CORRECTED CACHE CLEANING BLOCK ---
 echo "[*] Cleaning up: deleting script folder ..."
 cd /
 rm -rf "$SCRIPT_DIR"
