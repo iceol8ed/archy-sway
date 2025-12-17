@@ -143,19 +143,6 @@ chown -R "$TARGET_USER:$TARGET_USER" "$HOME_DIR/.zprezto/runcoms/"
 # --- START: CORRECTED CACHE CLEANING BLOCK ---
 echo "[*] Clearing Pacman and Paru package caches..."
 
-# 1. Clear Pacman cache
-# --noconfirm handles basic prompts, --ask 4 handles the 'Delete all?' prompt
-echo "[*] Clearing Pacman cache..."
-pacman -Scc --noconfirm --ask 4
-
-# 2. Clear Paru cache
-# We use 'paru --noconfirm' which passes the flag down to pacman
-echo "[*] Clearing Paru cache..."
-sudo -u "$TARGET_USER" paru -Scc --noconfirm --ask 4
-
-# --- END: CORRECTED CACHE CLEANING BLOCK ---
-
-# --- END: CORRECTED CACHE CLEANING BLOCK ---
 echo "[*] Cleaning up: deleting script folder ..."
 cd /
 rm -rf "$SCRIPT_DIR"
