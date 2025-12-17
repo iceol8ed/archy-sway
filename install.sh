@@ -97,7 +97,7 @@ mkinitcpio -P
 
 echo "[*] Installing base packages ..."
 retry_cmd pacman -S --noconfirm --needed \
-  sway autotiling-rs wtype polkit-kde-agent-1 xdg-desktop-portal-wlr wl-clipboard mpv \
+  sway autotiling-rs wtype polkit-kde-agent-1 xdg-desktop-portal-wlr xdg-desktop-portal-gtk wl-clipboard mpv \
   bluetui nvim foot swaybg grim slurp xorg-xwayland wl-clip-persist fuzzel cliphist fastfetch \
   deluge-gtk btop zip unzip zsh ttf-jetbrains-mono ttf-jetbrains-mono-nerd \
   noto-fonts noto-fonts-emoji noto-fonts-cjk curl wget base-devel yazi wiremix
