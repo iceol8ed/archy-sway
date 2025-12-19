@@ -70,7 +70,7 @@ chown -R "$TARGET_USER:$TARGET_USER" "$HOME_DIR/.config"
 # --------------------------------
 
 echo "[*] Enabling autologin for $TARGET_USER ..."
-sed -i "s/GETTY_ARGS="--noclear"/GETTY_ARGS="--autologin $TARGET_USER --noclear"/g" /etc/runit/sv/agetty-tty1/conf
+sed -i 's/GETTY_ARGS="--noclear"/GETTY_ARGS="--autologin '"$TARGET_USER"' --noclear"/g' /etc/runit/sv/agetty-tty1/conf
 
 echo "[*] Adding NOPASSWD to sudoers (insecure!) ..."
 echo "%wheel ALL=(ALL:ALL) NOPASSWD: ALL" >>/etc/sudoers
