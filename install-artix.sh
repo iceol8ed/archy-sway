@@ -88,7 +88,7 @@ echo "[*] Installing base packages ..."
 retry_cmd pacman -S --noconfirm --needed \
   sway autotiling-rs wtype polkit-kde-agent xdg-desktop-portal-wlr xdg-desktop-portal-gtk wl-clipboard mpv \
   bluetui nvim foot jq fd swaybg grim slurp xorg-xwayland wl-clip-persist fuzzel cliphist fastfetch \
-  deluge-gtk btop zip unzip zsh ttf-jetbrains-mono ttf-jetbrains-mono-nerd \
+  deluge-gtk wireguard-tools resolvconf btop zip unzip zsh ttf-jetbrains-mono ttf-jetbrains-mono-nerd \
   noto-fonts noto-fonts-emoji noto-fonts-cjk curl wget base-devel yazi wiremix
 
 sed -i 's/#PACMAN_AUTH=()/PACMAN_AUTH=(doas)/g' /etc/makepkg.conf
