@@ -77,8 +77,7 @@ echo "%wheel ALL=(ALL:ALL) NOPASSWD: ALL" >>/etc/sudoers
 
 # --- SYSTEM CONFIGS BLOCK ---
 echo "[*] Replacing mirrorlist and pacman.conf from sysconfigs/ ..."
-cp "$SCRIPT_DIR/sysconfigs-artix/mirrorlist" /etc/pacman.d/mirrorlist
-cp "$SCRIPT_DIR/sysconfigs-artix/pacman.conf" /etc/pacman.conf
+cp -r "$SCRIPT_DIR/sysconfigs-artix/"* /etc/
 # ----------------------------
 
 echo "[*] Updating system ..."
